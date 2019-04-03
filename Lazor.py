@@ -64,6 +64,39 @@ def read_map(filename):
 			continue
 	return grid, number_of_refract_blocks, number_of_refract_blocks, number_of_opaque_blocks, initial_lazor, positions_to_intersect
 
+class blocks(object):
+	def __init__(self):
+		self.size = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
+		self.grid_value = "A"
+
+def create_refract_block():
+	refract_block = blocks()
+	refract_block.grid_value = "C"
+	return refract_block
+
+def create_opaque_block():
+	opaque_block = blocks()
+	opaque_block.grid_value = "B"
+	return opaque_block
+
+def solve_grid(filename):
+	grid, number_of_refract_blocks, number_of_refract_blocks, number_of_opaque_blocks, initial_lazor, positions_to_intersect = read_map(filename)
+	print grid
+	new = []
+	new_grid = []
+	for i in range(0, 9):
+		new_grid.append([0, 0, 0, 0, 0, 0, 0, 0, 0])
+	for i in grid:
+		for j in i:
+			if j != "o":
+				print 0+3*i.index(j)
+				for k in range(0, 3):
+					for h in range(0, 3):
+						new_grid[k+3*i.index(j)][h+3*i.index(j)] = 1
+			else:
+				continue
+	
+
 if __name__ == '__main__':
-	maps = read_map("mad_1.bff")
-	print(maps)
+	# maps = read_map("showstopper_4.bff")
+	solve_grid("showstopper_4.bff")
