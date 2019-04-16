@@ -12,7 +12,7 @@ We created a code that solves Lazor <i> for </i> you!
 Lazor.py takes in the configuration of a particular level, runs through potential configurations
 that will provide a solution given the initial input.
 
-**__enjoy__**
+**_enjoy_**
 
 BY:
 Kunal Dani
