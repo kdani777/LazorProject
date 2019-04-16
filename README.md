@@ -1,5 +1,6 @@
 
-**Hello World!**
+<center>**Hello World!**</center>
+
 
 Have you ever heard of the addictive cellular device gaming application called Lazor? Us too!
 
@@ -13,8 +14,9 @@ Lazor.py takes in the configuration of a particular level, runs through potentia
 that will provide a solution given the initial input.
 
 **_enjoy_**
-
+<center>
 BY:  
 Kunal Dani  
 Marina Morrow  
 Shyanne Salen  
+</center>
