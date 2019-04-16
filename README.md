@@ -1,6 +1,3 @@
-
-<center>
-
 **Hello World**  
 
 Have you ever heard of the addictive cellular device gaming application called Lazor? Us too!  
@@ -20,4 +17,3 @@ BY:
 Kunal Dani  
 Marina Morrow  
 Shyanne Salen  
-</center>
