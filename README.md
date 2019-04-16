@@ -14,7 +14,7 @@ that will provide a solution given the initial input.
 
 **_enjoy_**
 
-BY:
-Kunal Dani
-Marina Morrow
-Shyanne Salen
+BY:  
+Kunal Dani  
+Marina Morrow  
+Shyanne Salen  
