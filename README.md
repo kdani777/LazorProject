@@ -13,7 +13,7 @@ that will provide a solution given the initial input.
 
 **_enjoy_**  
 
-BY:  
+By:
 Kunal Dani  
 Marina Morrow  
 Shyanne Salen  
