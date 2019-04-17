@@ -206,9 +206,6 @@ def lazors_in_grid(grid, lazors, a):
         if lazors[a].x <= float(2*len(grid)) and lazors[a].y <= float(2*len(grid)):
             return True
 
-def lazor_bounds_UT(grid, lazors):
-    lazors_in_grid()
-    assert 
 def gridmaker(new_grid):
     ng = '\n'.join([' '.join(i) for i in new_grid])
     return(ng)
@@ -290,15 +287,15 @@ def solve_grid(filename):
                             if lazors == []:
                                 not_a_solution = True
                             break
-    # lvl = filename.replace('.bff','')
-    # f = open('LazorSolutions.txt', 'w+')
-    # f.write('This is the solution for Lazor level: ')
-    # f.write(lvl)
-    # f.write('\n\nLegend \nx = No Block Allowed Here \no = Block Allowed Here \nA = Reflect Block \nB = Opaque Block \nC = Refract Block\n\n')
-    # f.write('Using the above legend, place the blocks according to the solution below\n\n')
-    # f.write(gridmaker(new_grid))
-    # f.close()
-    # return new_grid
+    lvl = filename.replace('.bff','')
+    f = open('LazorSolutions.txt', 'w+')
+    f.write('This is the solution for Lazor level: ')
+    f.write(lvl)
+    f.write('\n\nLegend \nx = No Block Allowed Here \no = Block Allowed Here \nA = Reflect Block \nB = Opaque Block \nC = Refract Block\n\n')
+    f.write('Using the above legend, place the blocks according to the solution below\n\n')
+    f.write(gridmaker(new_grid))
+    f.close()
+    return new_grid
 
 def block_wallUT(x,y,block_position,vx,vy):
     vertical_wall, horizontal_wall = block_wall(x,y,block_position,vx,vy)
@@ -312,19 +309,16 @@ def goalcheckUT(lazor_path, positions_to_intersect):
         goal_met = True
     assert goal_met, 'It seems the lazor did not hit the targets'
 
-def solve_gridUT(solution): # Unit Test for Solve grid function
-    showstopper_4 = [['B', 'A', 'B'], ['B', 'o', 'A'], ['A', 'o', 'B']]
-    numbered_6 = [['B', 'o', 'o'], ['A', 'x', 'x'], ['B', 'o', 'A'], ['A', 'x', 'o'], ['B', 'o', 'o']]
-    mad_1 = [['o', 'o', 'C', 'o'], ['o', 'o', 'o', 'A'], ['A', 'o', 'o', 'o'], ['o', 'o', 'o', 'o']]
-    mad_4 = [['o', 'o', 'o', 'o'], ['o', 'A', 'o', 'o'], ['A', 'o', 'o', 'o'], ['o', 'A', 'o', 'A'], ['o', 'o', 'A', 'o']]
-    mad_7 = [['o', 'o', 'A', 'o', 'o'], ['o', 'o', 'o', 'A', 'o'], ['A', 'o', 'A', 'o', 'x'], ['o', 'o', 'o', 'A', 'o'], ['o', 'o', 'A', 'o', 'o']]
-    tiny_5 = [['A', 'B', 'A'], ['o', 'o', 'o'], ['A', 'C', 'o']]
-    yarn_5 = [['o', 'B', 'x', 'o', 'o'], ['o', 'A', 'o', 'o', 'o'], ['A', 'x', 'o', 'o', 'A'], ['o', 'x', 'A', 'o', 'x'], ['A', 'o', 'x', 'x', 'A'], ['B', 'A', 'x', 'A', 'o']]
-    dark_1 = [['x', 'o', 'o'], ['o', 'B', 'o'], ['B', 'B', 'x']]
-    standard = [showstopper_4, numbered_6, mad_1, mad_4, mad_7, tiny_5, yarn_5, dark_1]
-    assert any([solution == x for x in standard]), 'It seems the blocks are not in the right place for any of these levels' 
+def lazor_bounds_UT(grid, x, y):
+    InBound = False
+    
+    if x >= 0.0 and y >= 0.0:
+        if x <= float(2*len(grid)) and y <= float(2*len(grid)):
+            InBound = True
+    assert InBound, 'The lazor is outside the boundaries of the grid'
 
 def read_mapUT(filename): # Unit Test for readmap function
+    solution = read_map(filename)
     showstopper_4 = ([['B', 'o', 'o'], ['o', 'o', 'o'], ['o', 'o', 'o']], 3, 0, 3, [['3', '6', '-1', '-1']], [(2.0, 3.0)])
     numbered_6 = ([['o', 'o', 'o'], ['o', 'x', 'x'], ['o', 'o', 'o'], ['o', 'x', 'o'], ['o', 'o', 'o']], 3, 0, 3, [['4', '9', '-1', '-1'], ['6', '9', '-1', '-1']], [(2.0, 5.0), (5.0, 0.0)])
     mad_1 = ([['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o']], 2, 1, 0, [['2', '7', '1', '-1']], [(3.0, 0.0), (4.0, 3.0), (2.0, 5.0), (4.0, 7.0)])
@@ -336,17 +330,38 @@ def read_mapUT(filename): # Unit Test for readmap function
     standard = [showstopper_4, numbered_6, mad_1, mad_4, mad_7, tiny_5, yarn_5, dark_1]
     assert any([solution == x for x in standard]), 'It seems the levels were not loaded correctly' 
 
+def solve_gridUT(filename): # Unit Test for Solve grid function
+    solution = solve_grid(filename)
+    showstopper_4 = [['B', 'A', 'B'], ['B', 'o', 'A'], ['A', 'o', 'B']]
+    numbered_6 = [['B', 'o', 'o'], ['A', 'x', 'x'], ['B', 'o', 'A'], ['A', 'x', 'o'], ['B', 'o', 'o']]
+    mad_1 = [['o', 'o', 'C', 'o'], ['o', 'o', 'o', 'A'], ['A', 'o', 'o', 'o'], ['o', 'o', 'o', 'o']]
+    mad_4 = [['o', 'o', 'o', 'o'], ['o', 'A', 'o', 'o'], ['A', 'o', 'o', 'o'], ['o', 'A', 'o', 'A'], ['o', 'o', 'A', 'o']]
+    mad_7 = [['o', 'o', 'A', 'o', 'o'], ['o', 'o', 'o', 'A', 'o'], ['A', 'o', 'A', 'o', 'x'], ['o', 'o', 'o', 'A', 'o'], ['o', 'o', 'A', 'o', 'o']]
+    tiny_5 = [['A', 'B', 'A'], ['o', 'o', 'o'], ['A', 'C', 'o']]
+    yarn_5 = [['o', 'B', 'x', 'o', 'o'], ['o', 'A', 'o', 'o', 'o'], ['A', 'x', 'o', 'o', 'A'], ['o', 'x', 'A', 'o', 'x'], ['A', 'o', 'x', 'x', 'A'], ['B', 'A', 'x', 'A', 'o']]
+    dark_1 = [['x', 'o', 'o'], ['o', 'B', 'o'], ['B', 'B', 'x']]
+    standard = [showstopper_4, numbered_6, mad_1, mad_4, mad_7, tiny_5, yarn_5, dark_1]
+    assert any([solution == x for x in standard]), 'It seems the blocks are not in the right place for any of these levels' 
 
 
 
 if __name__ == '__main__':
-solve_gridUT(solve_grid('showstopper_4.bff'))
-block_wallUT(6.0, 9.0, [(4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2), (6, 0), (6, 1), (6, 2)], 1.0, 1.0)
-lazor_path = [(2.0, 7.0), (2.0, 7.0), (3.0, 6.0), (3.0, 6.0), (4.0, 5.0), (4.0, 5.0), 
-            (5.0, 4.0), (5.0, 4.0), (6.0, 3.0), (6.0, 3.0), (5.0, 2.0), (5.0, 2.0), (4.0, 3.0), 
-            (4.0, 3.0), (3.0, 4.0), (4.0, 1.0), (3.0, 0.0), (3.0, 4.0), (2.0, 5.0), (3.0, 0.0), (2.0, -1.0), 
-            (2.0, 5.0), (3.0, 6.0), (2.0, -1.0), (3.0, 6.0), (4.0, 7.0), (4.0, 7.0), (5.0, 8.0), 
-            (5.0, 8.0), (6.0, 9.0), (6.0, 9.0)]
-positions_to_intersect = [(3.0, 0.0), (4.0, 3.0), (2.0, 5.0), (4.0, 7.0)]
-goalcheckUT(lazor_path, positions_to_intersect)
-solve_grid("mad_1.bff")
+    read_mapUT('mad_1.bff')
+    solve_gridUT('mad_1.bff')
+
+    block_wallUT(6.0, 9.0, [(4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2), (6, 0), (6, 1), (6, 2)], 1.0, 1.0)
+
+    lazor_path = [(2.0, 7.0), (2.0, 7.0), (3.0, 6.0), (3.0, 6.0), (4.0, 5.0), (4.0, 5.0),
+                (5.0, 4.0), (5.0, 4.0), (6.0, 3.0), (6.0, 3.0), (5.0, 2.0), (5.0, 2.0), (4.0, 3.0),
+                (4.0, 3.0), (3.0, 4.0), (4.0, 1.0), (3.0, 0.0), (3.0, 4.0), (2.0, 5.0), (3.0, 0.0), (2.0, -1.0),
+                (2.0, 5.0), (3.0, 6.0), (2.0, -1.0), (3.0, 6.0), (4.0, 7.0), (4.0, 7.0), (5.0, 8.0),
+                (5.0, 8.0), (6.0, 9.0), (6.0, 9.0)]
+    positions_to_intersect = [(3.0, 0.0), (4.0, 3.0), (2.0, 5.0), (4.0, 7.0)]
+    
+    goalcheckUT(lazor_path, positions_to_intersect)
+
+    grid = [['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o']]
+    L = lazor(2.0, 6.0, 1.0, -1.0)
+    lazor_bounds_UT(grid, L.x, L.y)
+
+    solve_grid("mad_1.bff")
