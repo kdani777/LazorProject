@@ -41,7 +41,7 @@ def overlap(lazor_path, first_pass):
 
     **Parameters**
 
-        lazor_path: *list of tuples*
+        lazor_path: *list, tup*
             This is the list containing tuples of the lazor coordinates
         first_pass: *bool*
             This is a boolean defaulted as false used to check if the lazor
@@ -50,7 +50,7 @@ def overlap(lazor_path, first_pass):
 
     **Returns**
 
-        overlap: *boolean*
+        overlap: *bool*
             Either true or false depending on if current
             lazor coordinates overlap with previous coordinates
     '''
@@ -71,7 +71,7 @@ def lazors_in_grid(grid, lazors, a):
 
     **Parameters**
 
-        grid: *list of lists*
+        grid: *list, list, str*
             A list of lists containing the physical positions and dimensions of
             of the grid both laterally and longitudinally.
         lazors: *float*
@@ -97,7 +97,7 @@ def lazor_bounds_UT(grid, x, y):
 
     **Parameters**
 
-        grid: *list of lists*
+        grid: *list, list, str*
             A list of lists containing the physical positions and dimensions of
             of the grid both laterally and longitudinally.
         x,y: *float*
