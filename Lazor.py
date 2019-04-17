@@ -324,7 +324,7 @@ def solve_gridUT(solution): # Unit Test for Solve grid function
     standard = [showstopper_4, numbered_6, mad_1, mad_4, mad_7, tiny_5, yarn_5, dark_1]
     assert any([solution == x for x in standard]), 'It seems the blocks are not in the right place for any of these levels' 
 
-def read_mapUT(filename): # Unit Test for Solve grid function
+def read_mapUT(filename): # Unit Test for readmap function
     showstopper_4 = ([['B', 'o', 'o'], ['o', 'o', 'o'], ['o', 'o', 'o']], 3, 0, 3, [['3', '6', '-1', '-1']], [(2.0, 3.0)])
     numbered_6 = ([['o', 'o', 'o'], ['o', 'x', 'x'], ['o', 'o', 'o'], ['o', 'x', 'o'], ['o', 'o', 'o']], 3, 0, 3, [['4', '9', '-1', '-1'], ['6', '9', '-1', '-1']], [(2.0, 5.0), (5.0, 0.0)])
     mad_1 = ([['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o']], 2, 1, 0, [['2', '7', '1', '-1']], [(3.0, 0.0), (4.0, 3.0), (2.0, 5.0), (4.0, 7.0)])
