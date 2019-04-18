@@ -120,4 +120,3 @@ def lazors_in_grid(grid, lazors, index):
         if lazors[index].x <= float(2*len(grid)) and lazors[index].y \
             <= float(2*len(grid)):
             return True
-
