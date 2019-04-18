@@ -37,7 +37,7 @@ Then, the .bff files must have the lazors. Each lazor is on its own line proceed
 by the letter L. Then, the starting points and direction are given in 
 the order of x, y, vx, vy separated by spaces. Then, the points to 
 intersect are given in their own line for each point. They start with a
- P and then are list x then y separated by a space.
+P and then are list x then y separated by a space.
 
 The solution to the file is saved as a txt file and as a png file. The 
 png file shows the places of the block in a grid. In this grid, the 
