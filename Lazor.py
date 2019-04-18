@@ -74,8 +74,7 @@ Blocks.py, lazors_func.py, print_solution.py, and Read_map.py
         Additionally, it contains stationary_blocks, which determines 
         the positions of the stationary blocks in the inputted grid.
         It also contains place_block, which places the available blocks 
-        in the grid and makes a new_grid to try and solve. Then, this 
-        file contains a unit test for block_wall\\\\
+        in the grid and makes a new_grid to try and solve.
 
         For more information about the functions see Blocks.py.
     
@@ -84,9 +83,7 @@ Blocks.py, lazors_func.py, print_solution.py, and Read_map.py
         points of the lazor. This class has the move function, which 
         allows the lazor to move. Then, it also contains the overlap 
         function, which determines if the lazor gets stuck and 
-        continuously overlaps itself. Then, it contains the 
-        lazors_in_grid, which determines if the lazor is inside the 
-        grid. This file contains a unit test for lazors_in_grid\\\\
+        continuously overlaps itself.
         
         For more information about the functions see lazor_func.py.
 
@@ -252,17 +249,5 @@ def solve_grid(filename):
     save_grid(grid_colors, level) 
     return new_grid
 
-def solve_grid_UT(solution):
-    showstopper_4 = [['B', 'A', 'B'], ['B', 'o', 'A'], ['A', 'o', 'B']]
-    numbered_6 = [['B', 'o', 'o'], ['A', 'x', 'x'], ['B', 'o', 'A'], ['A', 'x', 'o'], ['B', 'o', 'o']]
-    mad_1 = [['o', 'o', 'C', 'o'], ['o', 'o', 'o', 'A'], ['A', 'o', 'o', 'o'], ['o', 'o', 'o', 'o']]
-    mad_4 = [['o', 'o', 'o', 'o'], ['o', 'A', 'o', 'o'], ['A', 'o', 'o', 'o'], ['o', 'A', 'o', 'A'], ['o', 'o', 'A', 'o']]
-    mad_7 = [['o', 'o', 'A', 'o', 'o'], ['o', 'o', 'o', 'A', 'o'], ['A', 'o', 'A', 'o', 'x'], ['o', 'o', 'o', 'A', 'o'], ['o', 'o', 'A', 'o', 'o']]
-    tiny_5 = [['A', 'B', 'A'], ['o', 'o', 'o'], ['A', 'C', 'o']]
-    yarn_5 = [['o', 'B', 'x', 'o', 'o'], ['o', 'A', 'o', 'o', 'o'], ['A', 'x', 'o', 'o', 'A'], ['o', 'x', 'A', 'o', 'x'], ['A', 'o', 'x', 'x', 'A'], ['B', 'A', 'x', 'A', 'o']]
-    dark_1 = [['x', 'o', 'o'], ['o', 'B', 'o'], ['B', 'B', 'x']]
-    standard = [showstopper_4, numbered_6, mad_1, mad_4, mad_7, tiny_5, yarn_5, dark_1]
-    assert (solution == showstopper_4), 'It seems the blocks are not in the right place for any of these levels' 
-
 if __name__ == '__main__':
-    solve_grid("mad_4.bff")
+    solve_grid("dark_1.bff")
