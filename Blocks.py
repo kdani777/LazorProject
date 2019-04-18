@@ -199,13 +199,6 @@ def block_wall(x,y,block_position,vx,vy):
                 horizontal_wall = True
     return vertical_wall, horizontal_wall
 
-
-def block_wallUT(x,y,block_position,vx,vy):
-    vertical_wall, horizontal_wall = block_wall(x,y,block_position,vx,vy)
-    assert (vertical_wall == True and horizontal_wall == False or 
-            vertical_wall == False and horizontal_wall == True or
-            vertical_wall == False and horizontal_wall == False),'The lazor should only hit one wall or no walls, here both walls were hit'
-
 def stationary_blocks(grid):
     '''
     This function uses a grid to creates a list of objects for the 
