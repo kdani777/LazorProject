@@ -176,13 +176,13 @@ class Test_Lazor(object):
       assert any([solution == x for x in standard]), 'It seems the blocks \
       are not in the right place for any of these levels' 
 
-  if __name__ == '__main__':
-    filename = 'mad_1.bff'
-    grid, number_of_reflect_blocks, number_of_refract_blocks, \
-    number_of_opaque_blocks, initial_lazor, positions_to_intersect = \
-    read_map(filename)
-    read_map = read_map(filename)
-    Test_Lazor().read_map_UT(read_map)
-    solution = solve_grid("mad_4.bff")
-    Test_Lazor().solve_grid_UT(solution, filename)
-    Test_Lazor().lazors_func_UT(grid, 1, 1)
+if __name__ == '__main__':
+  filename = 'mad_1.bff'
+  grid, number_of_reflect_blocks, number_of_refract_blocks, \
+  number_of_opaque_blocks, initial_lazor, positions_to_intersect = \
+  read_map(filename)
+  read_map = read_map(filename)
+  Test_Lazor().read_map_UT(read_map)
+  solution = solve_grid("mad_4.bff")
+  Test_Lazor().solve_grid_UT(solution, filename)
+  Test_Lazor().lazors_func_UT(grid, 1, 1)
