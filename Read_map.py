@@ -92,7 +92,8 @@ def read_map(filename):
             elif line.startswith("L"):
                 initial_lazor.append(line.strip().split()[1:])
             elif line.startswith("P"):
-                positions_to_intersect.append(tuple(map(float, line.strip().split()[1:])))
+                positions_to_intersect.append(tuple(map(float, \
+                    line.strip().split()[1:])))
             else:
                 continue
         elif line.startswith('GRID STOP'):
@@ -100,4 +101,5 @@ def read_map(filename):
         else:
             grid.append(line.strip().split())
 
-    return grid, number_of_reflect_blocks, number_of_refract_blocks, number_of_opaque_blocks, initial_lazor, positions_to_intersect
+    return grid, number_of_reflect_blocks, number_of_refract_blocks, \
+    number_of_opaque_blocks, initial_lazor, positions_to_intersect
