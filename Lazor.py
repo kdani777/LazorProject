@@ -227,8 +227,10 @@ def solve_grid(filename):
     f = open('Lazor_Solutions.txt', 'w+')
     f.write('This is the solution for Lazor level: ')
     f.write(level)
-    f.write('\n\nLegend \nx = No Block Allowed Here \no = Block Allowed Here \nA = Reflect Block \nB = Opaque Block \nC = Refract Block\n\n')
-    f.write('Using the above legend, place the blocks according to the solution below\n\n')
+    f.write('\n\nLegend \nx = No Block Allowed Here \no = Block Allowed Here' \
+       '\nA = Reflect Block \nB = Opaque Block \nC = Refract Block\n\n')
+    f.write('Using the above legend, place the blocks according to the' \
+        'solution below\n\n')
     f.write(gridmaker(new_grid))
     f.close()
 
@@ -250,4 +252,4 @@ def solve_grid(filename):
     return new_grid
 
 if __name__ == '__main__':
-    solve_grid("dark_1.bff")
+    solve_grid("yarn_5.bff")
