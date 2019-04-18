@@ -139,7 +139,7 @@ class Test_Lazor(object):
     assert InBound, 'The lazor is outside the boundaries of the grid'
 
   def solve_grid_UT(self, solution, filename):
-     '''
+    '''
     This function unit tests the types for the final grid solution of the 
     solve_grid function in lazors.py. It also tests the solution against known 
     solutions if the filename is one of the known maps.
@@ -171,8 +171,10 @@ class Test_Lazor(object):
        ['A', 'x', 'o', 'o', 'A'], ['o', 'x', 'A', 'o', 'x'],\
        ['A', 'o', 'x', 'x', 'A'], ['B', 'A', 'x', 'A', 'o']]
       dark_1 = [['x', 'o', 'o'], ['o', 'B', 'o'], ['B', 'B', 'x']]
-      standard = [showstopper_4, numbered_6, mad_1, mad_4, mad_7, tiny_5, yarn_5, dark_1]
-      assert any([solution == x for x in standard]), 'It seems the blocks are not in the right place for any of these levels' 
+      standard = [showstopper_4, numbered_6, mad_1, mad_4, mad_7, \
+      tiny_5, yarn_5, dark_1]
+      assert any([solution == x for x in standard]), 'It seems the blocks \
+      are not in the right place for any of these levels' 
 
 if __name__ == '__main__':
   filename = 'mad_1.bff'
