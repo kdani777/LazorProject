@@ -1,61 +1,94 @@
 '''
-Author: Kunal Dani, Shyanne Salen, Marina Morrow
+Authors: Kunal Dani, Marina Morrow, Shyanne Salen
 Last Modified: April 17th, 2019
+Lazor Project
+Software Carpentry
+lazors_func
 
-File contains lazor class and object used in Lazor.py file when solving a grid.
-Three functions also contained within this file: overlap, lazors_in_grid,
-and lazor_bounds_UT
+This file contains the lazor class for the lazor to move. It also
+contains an overlap function which determines if the lazor gets stuck
+in a loop. Additionally, the function lazors_in_grid determines if the
+lazors are moving within the grid.
 
-Functions:
+***CLASS***
+    lazor
+        This class creates a lazor object and uses the function move 
+        to move the lazor through a grid.
 
-    overlap(lazor_path, first_pass)
-
-    lazors_in_grid(grid, lazors, a)
-
-    lazor_bounds_UT(grid, x, y)
+***FUNCTIONS***
+    overlap
+        This function determines if the lazor overlaps itself for two
+        consecutive points so the lazor does not get stuck in a loop
+        between blocks where it keeps running over itself.
+    lazors_in_grid
+        This function determines in the lazor is within the bounds of 
+        the grid.
 '''
-
 
 class lazor:
     '''
-    Class contains the attributes of the lazor, its position (given by x, y)
-    And its trajectory (given by vx, vy)
-    lazor.move function uses lazor trajectory to alter lazors position during
-    execution of the code
+    This lazor class creates an lazor object that can move around a
+    grid using x, y cordinates and the directions vx and vy.
+
+    ***Functions***
+        __init__
+            This determines self for the lazor.
+        move
+            This function moves the lazor around the grid.
     '''
     def __init__(self, x, y, vx, vy):
+        '''
+        This function determines self for the lazor and can be used to
+        create an instance of the object. The lazor contains an x and y 
+        position and a direction in the form vx, vy.
+
+        ***Parameters***
+            x: *float*
+                This is the x coordinate of the lazor position on a grid.
+            y: *float*
+                This is the y coordinate of the lazor position on a grid.
+            vx: *float*
+                This is used to define the direction that lazor is moving
+                this is either 1 or -1 to describe the lazors path.
+            vy: *float*
+                This is used to define the direction that lazor is moving
+                this is either 1 or -1 to describe the lazors path.
+        '''
         self.x = x
         self.y = y
         self.vx = vx
         self.vy = vy
-
     def move(self):
+        '''
+        This function allows the lazor to move around the grid. It uses
+        the self variable vx and vy to change the x and y coordinate of
+        the lazor to move it around the grid according the direction.
+        '''
         self.x += self.vx
         self.y += self.vy
 
-
-def overlap(lazor_path, first_pass):
+def overlap(lazor_path, first_pass): 
     '''
-    overlap function identifies if lazor overlaps its own previous coordinate
-    by comparing the current coordinates and original coordinates.
+    This function determines if the lazor overlaps itself on more than
+    two points to determine if the lazor is stuck in a loop between
+    blocks. This function returns True if the lazor overlaps itself for
+    more than one point.
 
-    **Parameters**
-
-        lazor_path: *list, tup*
-            This is the list containing tuples of the lazor coordinates
-        first_pass: *bool*
-            This is a boolean defaulted as false used to check if the lazor
-            is passing through the coordinates on its first time or
-            subsequent times (hence overlap)
-
-    **Returns**
-
-        overlap: *bool*
-            Either true or false depending on if current
-            lazor coordinates overlap with previous coordinates
+    ***Parameter***
+        lazor_path: *list*
+            This is a list of the (x,y) tuples of where the lazor has 
+            been.
+        first_pass: *boolean*
+            This is either True or False to determine if it is the 
+            first point in the lazor path. If it is the first point
+            then the lazor cannot overlap itself.
+    ***Returns***
+        overlap: *boolean*
+            This returns either True or False if the lazor overlaps 
+            itself. If it overlaps itself, it returns True.
     '''
     overlap = False
-    if first_pass is False:
+    if first_pass == False:
         if lazor_path[-2] == lazor_path[0]:
             if lazor_path[-1] == lazor_path[1]:
                 x = lazor_path[-1][0]
@@ -63,55 +96,34 @@ def overlap(lazor_path, first_pass):
                 overlap = True
     return overlap
 
-
-def lazors_in_grid(grid, lazors, a):
+def lazors_in_grid(grid, lazors, index):
     '''
-    This function checks if the lazor has tangible coordinates 
-    within the bounds of the grid that are not at the origin
+    This function determines if the lazor path is inside the grid. If it
+    is in the grid it returns True.
 
-    **Parameters**
+    ***Parameters***
+        grid: *list*
+            This is a list of the list of rows of the grid.
+        lazors: *list*
+            This is a list of the lazor objects.
+        index: *int*
+            This identifies which lazor is being tested of whether it is
+            in the grid in the list lazors, which is a list of lazor 
+            objects.
 
-        grid: *list, list, str*
-            A list of lists containing the physical positions and dimensions of
-            of the grid both laterally and longitudinally.
-        lazors: *float*
-            Provides that coordinates of a specific lazor
-            object within list of lazors.
-        a: *int*
-            Provides specific indice of lazor object within list of lazors
-    
-    **Returns**
-
-        *bool*
-            Returns a boolean 'True' if lazor is within bounds of grid
-
+    ***Returns***
+        True
+            This returns a boolean of True if the lazors are outside
+            of the grid.
     '''
-    if lazors[a].x >= 0.0 and lazors[a].y >= 0.0:
-        if lazors[a].x <= float(2 * len(grid)) and lazors[a].y <= float(2 * len(grid)):
+    if lazors[index].x >= 0.0 and lazors[index].y >= 0.0:
+        if lazors[index].x <= float(2*len(grid)) and lazors[index].y \
+            <= float(2*len(grid)):
             return True
 
-
 def lazor_bounds_UT(grid, x, y):
-    '''
-    Unit test to check if lazor is within boundaries of grid
-
-    **Parameters**
-
-        grid: *list, list, str*
-            A list of lists containing the physical positions and dimensions of
-            of the grid both laterally and longitudinally.
-        x,y: *float*
-            Provides that coordinates of a specific
-            lazor object within list of lazors.
-
-    **Returns**
-
-        InBound: *bool*
-            A boolean that returns true if lazor is within boundaries of grid
-
-    '''
     InBound = False
     if x >= 0.0 and y >= 0.0:
-        if x <= float(2 * len(grid)) and y <= float(2 * len(grid)):
+        if x <= float(2*len(grid)) and y <= float(2*len(grid)):
             InBound = True
     assert InBound, 'The lazor is outside the boundaries of the grid'

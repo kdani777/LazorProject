@@ -1,44 +1,50 @@
 '''
-Author: Kunal Dani, Shyanne Salen, Marina Morrow
+Authors: Kunal Dani, Marina Morrow, Shyanne Salen
 Last Modified: April 17th, 2019
+Lazor Project
+Software Carpentry
+print_solution
 
-File containts ancillary functions used to reformat output from solve_grid
-function into more convenient easily readable text and png files. Corresponding
-image is then saved into separate file.
+This file makes the grid readable and saves the grid as an image.
 
-Functions:
-    gridmaker(new_grid)
+***Functions***
+    gridmaker
+        This functions joins the grid as a string to make it look nice 
+        in a txt file.
 
-    get_colors()
+    get_colors
+        This function assigns a r, g, and b value to a number to be able
+        to access certain colors quickly.
 
-    save_grid()
+    save_grid
+        This function uses a grid to save an image of the solved grid as 
+        a png file.
 '''
-from PIL import Image
 
+from PIL import Image
 
 def gridmaker(new_grid):
     '''
-    Function will reformat grid from a list of list of strings
-    into an array of combined elements in the form of a grid
+    This function takes a grid which is in a list of lists form and
+    makes it a string for easier exporting.
 
-    **Parameters**
+    ***Parameters***
+        new_grid: *list*
+            This is a list of list of each row of the solved grid.
 
-        new_grid: *list, list, str*
-            Contains solved grid for corresponding level
-
-    **Returns**
-
+    ***Returns***
         ng: *str*
-            Reformatted array of joined list elements
+            This is a string of the values in new grid.
     '''
-
     ng = '\n'.join([' '.join(i) for i in new_grid])
-    return(ng)
-
+    return ng
 
 def get_colors():
     '''
-    Colors map that the maze will use:
+    This function assigns a value to set colors to easily be able to
+    assign colors to a block.
+
+    Colors that the grid will use:
         0 - Black - An opaque block
         1 - White - A reflect block
         2 - Gray - The background
@@ -51,52 +57,44 @@ def get_colors():
             a color.
     '''
     return {
-        0: (169, 169, 169),
+        0: (169,169,169),
         1: (255, 255, 255),
         2: (0, 0, 0),
         3: (153, 204, 255)
     }
 
-
 def save_grid(grid, name, blockSize=50):
     '''
-    Function saves the grid into a new png file containing block
-    images corresponding to the the type of element within the grid
-    (reflect, refract, opaque blocks and open and closed grid spaces)
+    This function saves the solved grid as a png image file.
 
-    **Parameters**
-
-        grid: *list, list, int*
-            Contains a list of list of integers that represent
-            the block type and its corresponding color
-
+    ***Parameters***
+        grid: *list*
+            This is a list of lists of the rows in the solved grid.
         name: *str*
-            Corresponds to the name of the level
-    **Returns**
-
-        A png will be saved with the illustrated grid
-        containing the solution
-
+            This is the name of the level to save the image as this name.
+        blockSize: *int* **Optional**
+            This is the size of the blocks in pixels.
     '''
-    height_1 = len(grid)
-    width_1 = len(grid[0])
-    height = height_1 * blockSize
-    width = width_1 * blockSize
+    nBlocks = len(grid)
+    height = len(grid)
+    width = len(grid[0])
+    new_height = height * blockSize
+    new_width = width * blockSize
     colors = get_colors()
-    img = Image.new("RGB", (width, height), color=0)
-    for jx in range(width_1):
-        for jy in range(height_1):
+    img = Image.new("RGB", (new_width, new_height), color=0)
+    for jx in range(width):
+        for jy in range(height):
             x = jx * blockSize
             y = jy * blockSize
             for i in range(1, blockSize):
                 for j in range(1, blockSize):
                     img.putpixel((x + i, y + j), colors[grid[jy][jx]])
-    for a in range(width):
-        b = height - 1
-        img.putpixel((a, b), (0, 0, 0))
-    for b in range(height):
-        a = width - 1
-        img.putpixel((a, b), (0, 0, 0))
+    for a in range(new_width):
+        b = new_height-1
+        img.putpixel((a,b), (0, 0, 0))
+    for b in range(new_height):
+        a = new_width-1
+        img.putpixel((a,b), (0, 0, 0))
     if not name.endswith(".png"):
         name += ".png"
     img.save("%s" % name)
