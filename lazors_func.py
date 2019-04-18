@@ -121,9 +121,3 @@ def lazors_in_grid(grid, lazors, index):
             <= float(2*len(grid)):
             return True
 
-def lazor_bounds_UT(grid, x, y):
-    InBound = False
-    if x >= 0.0 and y >= 0.0:
-        if x <= float(2*len(grid)) and y <= float(2*len(grid)):
-            InBound = True
-    assert InBound, 'The lazor is outside the boundaries of the grid'
